@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const backgroundMusic = document.getElementById('backgroundMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const cakeCandle = document.getElementById('cakeCandle');
     const startButton = document.getElementById('startButton');
     const envelopeContainer = document.getElementById('envelopeContainer');
     const unfoldButton = document.getElementById('unfoldButton');
@@ -33,6 +35,28 @@ document.addEventListener('DOMContentLoaded', () => {
             // Optionally, show a play button if autoplay fails
         });
     });
+
+    // --- Global controls ---
+    musicToggle.addEventListener('click', () => {
+        if (backgroundMusic.paused) {
+            backgroundMusic.play().catch(error => console.log('Play failed:', error));
+        } else {
+            backgroundMusic.pause();
+        }
+        updateMusicButton();
+    });
+
+    cakeCandle?.addEventListener('click', () => {
+        createSparkles(18);
+    });
+
+    function updateMusicButton() {
+        musicToggle.textContent = backgroundMusic.paused ? 'Play Music' : 'Pause Music';
+    }
+
+    backgroundMusic.addEventListener('play', updateMusicButton);
+    backgroundMusic.addEventListener('pause', updateMusicButton);
+    updateMusicButton();
 
     // --- Step 2: Envelope Interactions ---
     envelopeContainer.addEventListener('click', () => {
@@ -158,6 +182,24 @@ document.addEventListener('DOMContentLoaded', () => {
             fireworksContainer.appendChild(firework);
 
             firework.addEventListener('animationend', () => firework.remove());
+        }
+    }
+
+    // --- Sparkle Helper ---
+    function createSparkles(count = 20) {
+        const sparkleContainer = document.querySelector('.sparkle-container');
+        if (!sparkleContainer) return;
+
+        for (let i = 0; i < count; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.style.left = `${Math.random() * 70 + 15}%`;
+            sparkle.style.top = `${Math.random() * 40 + 30}%`;
+            sparkle.style.width = `${Math.random() * 10 + 8}px`;
+            sparkle.style.height = sparkle.style.width;
+            sparkle.style.animationDuration = `${Math.random() * 0.8 + 0.9}s`;
+            sparkleContainer.appendChild(sparkle);
+            sparkle.addEventListener('animationend', () => sparkle.remove());
         }
     }
 });

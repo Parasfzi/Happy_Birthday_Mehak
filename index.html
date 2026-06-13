@@ -13,6 +13,10 @@
         Your browser does not support the audio element.
     </audio>
 
+    <div class="music-control" id="musicControl">
+        <button id="musicToggle" class="action-button">Play Music</button>
+    </div>
+
     <div class="step active" id="step1">
         <div class="welcome-card">
             <h1 class="welcome-title">You've got a surprise!</h1>
@@ -48,6 +52,7 @@
         <div class="celebration-container">
             <div class="fireworks-container"></div>
             <div class="confetti-cannon-container"></div>
+            <div class="sparkle-container"></div>
             <div class="balloons-container"></div>
 
             <div class="celebration-card">
@@ -64,11 +69,12 @@
                         <div class="drip drip1"></div>
                         <div class="drip drip2"></div>
                         <div class="drip drip3"></div>
-                        <div class="candle">
+                        <div class="candle" id="cakeCandle">
                             <div class="flame" id="candleFlame"></div>
                         </div>
                     </div>
                 </div>
+                <p class="wish-instruction">Tap the candle to make a wish and watch the sparkles!</p>
                 <p class="final-wish">May your special day be filled with immense joy, laughter, and all the wonderful things life has to offer. Here's to another year of amazing adventures!</p>
                 <p class="signature">With love and best wishes <span class="heart-icon"></span></p>
             </div>
