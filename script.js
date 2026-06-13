@@ -29,11 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Step 1: Welcome Screen Interactions ---
     startButton.addEventListener('click', () => {
         transitionToStep('step2');
-        // Autoplay music (often requires user interaction first)
-        backgroundMusic.play().catch(error => {
-            console.log("Autoplay prevented:", error);
-            // Optionally, show a play button if autoplay fails
-        });
     });
 
     // --- Global controls ---
@@ -73,6 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Step 3: Letter Unfold Interactions ---
     unfoldButton.addEventListener('click', () => {
         transitionToStep('step4');
+        backgroundMusic.play().catch(error => {
+            console.log('Autoplay prevented on unfold:', error);
+        });
+        updateMusicButton();
         startCelebrationAnimations();
     });
 
