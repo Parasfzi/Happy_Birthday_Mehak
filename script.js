@@ -36,7 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Step 2: Envelope Interactions ---
-    envelopeContainer.addEventListener('click', () => {
+    function openEnvelope(event) {
+        if (event) {
+            event.preventDefault();
+        }
+        if (envelopeContainer.classList.contains('open')) return;
+
         envelopeContainer.classList.add('open');
         envelopeContainer.querySelector('.click-instruction').style.opacity = '0'; // Hide instruction
         setTimeout(() => {
@@ -45,7 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('letterContainer').classList.add('show');
             }, 100); // Small delay for letter reveal animation
         }, 700); // Duration matches envelope flap animation
-    });
+    }
+
+    envelopeContainer.addEventListener('click', openEnvelope);
+    envelopeContainer.addEventListener('touchend', openEnvelope);
 
     // --- Step 3: Letter Unfold Interactions ---
     unfoldButton.addEventListener('click', () => {
