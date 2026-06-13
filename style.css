@@ -36,6 +36,7 @@ body {
     min-height: 100vh;
     overflow: hidden; /* Prevent scrollbars from animations */
     perspective: 1000px; /* For 3D transforms */
+    padding: 20px;
 }
 
 .step {
@@ -43,11 +44,12 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
-    position: absolute;
+    min-height: 100vh;
+    position: relative;
     top: 0;
     left: 0;
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    padding: 20px;
 }
 
 .step.active {
@@ -85,13 +87,14 @@ body {
 /* --- Step 1: Welcome Screen --- */
 .welcome-card {
     text-align: center;
-    padding: 40px;
+    padding: 30px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 15px 30px var(--shadow-heavy);
     max-width: 500px;
+    width: min(100%, 520px);
     animation: fadeIn 1s ease-out;
 }
 
@@ -119,8 +122,9 @@ body {
 
 .envelope {
     position: relative;
-    width: 320px;
-    height: 200px;
+    width: min(320px, 85vw);
+    aspect-ratio: 16 / 10;
+    max-width: 320px;
 }
 
 .envelope-back {
@@ -206,11 +210,11 @@ body {
 }
 
 .letter {
-    width: 400px;
+    width: min(420px, 100%);
     max-width: 100%; /* Ensure it fits smaller screens */
     background-color: var(--letter-paper);
     color: var(--bg-dark);
-    padding: 30px;
+    padding: 25px;
     border-radius: 10px;
     box-shadow: 0 10px 20px var(--shadow-medium);
     line-height: 1.8;
@@ -326,14 +330,15 @@ body {
 
 .cake {
     position: relative;
-    width: 280px; /* Slightly larger cake */
-    height: 280px;
+    width: min(280px, 85vw); /* Slightly larger cake */
+    aspect-ratio: 1 / 1;
     margin: 0 auto; /* Center the cake */
 }
 
 .plate {
-    width: 300px;
-    height: 25px;
+    width: 110%;
+    max-width: 300px;
+    height: 22px;
     background-color: #ccc;
     position: absolute;
     bottom: 40px;
@@ -345,21 +350,21 @@ body {
 
 .layer {
     position: absolute;
-    width: 280px;
-    height: 60px; /* Taller layers */
+    width: 100%;
+    height: 18%; /* Taller layers */
     background-color: var(--cake-bottom);
     border-radius: 50% / 25%;
     left: 50%;
     transform: translateX(-50%);
 }
-.layer-bottom { bottom: 45px; background-color: var(--cake-bottom); width: 280px; }
-.layer-middle { bottom: 85px; background-color: var(--cake-middle); width: 260px; }
-.layer-top { bottom: 125px; background-color: var(--cake-top); width: 240px; }
+.layer-bottom { bottom: 45px; background-color: var(--cake-bottom); width: 100%; }
+.layer-middle { bottom: 85px; background-color: var(--cake-middle); width: 92%; }
+.layer-top { bottom: 125px; background-color: var(--cake-top); width: 84%; }
 
 .icing {
     position: absolute;
-    width: 240px;
-    height: 35px; /* Thicker icing */
+    width: 84%;
+    height: 14%; /* Thicker icing */
     background-color: white;
     bottom: 165px;
     border-radius: 50% / 25%;
@@ -549,26 +554,40 @@ body {
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
-    .welcome-title { font-size: 2.5rem; }
+    .step { padding: 15px; }
+    .welcome-card { padding: 25px; }
+    .welcome-title { font-size: 2.4rem; }
     .welcome-message { font-size: 1rem; }
     .letter p { font-size: 1rem; }
-    .main-greeting { font-size: 2rem; }
-    .recipient-name { font-size: 3.5rem; }
+    .main-greeting { font-size: 2.1rem; white-space: normal; }
+    .recipient-name { font-size: 3rem; }
     .final-wish { font-size: 1rem; }
-    .signature { font-size: 1.5rem; }
-    .cake { transform: scale(0.8); }
-    .letter { width: 90%; padding: 20px; }
-    .envelope { transform: scale(0.8); } /* Scale down envelope */
+    .signature { font-size: 1.6rem; }
+    .cake { width: min(240px, 72vw); }
+    .letter { width: min(420px, 100%); padding: 20px; }
+    .envelope { width: min(260px, 88vw); }
+    .action-button { width: min(320px, 100%); }
+    .celebration-card { width: min(700px, 95vw); padding: 25px; }
+    .cake-container { margin: 22px auto; }
+    .balloon { width: min(70px, 12vw); height: min(90px, 15vw); }
+    .balloon::before { width: 8px; height: 8px; bottom: -4px; }
+    .balloon::after { height: 55px; top: 80px; }
 }
 
 @media (max-width: 480px) {
-    .welcome-title { font-size: 2rem; }
+    .welcome-title { font-size: 1.9rem; }
     .welcome-message { font-size: 0.9rem; }
-    .action-button { padding: 10px 20px; font-size: 1rem; }
-    .main-greeting { font-size: 1.8rem; }
-    .recipient-name { font-size: 2.8rem; }
-    .final-wish { font-size: 0.9rem; }
+    .action-button { padding: 10px 18px; font-size: 0.95rem; width: 100%; }
+    .main-greeting { font-size: 1.7rem; }
+    .recipient-name { font-size: 2.5rem; }
+    .final-wish { font-size: 0.95rem; }
     .signature { font-size: 1.2rem; }
-    .cake { transform: scale(0.7); }
-    .envelope { transform: scale(0.7); } /* Even smaller envelope */
+    .cake { width: min(210px, 80vw); }
+    .letter { padding: 18px; }
+    .envelope { width: min(240px, 86vw); }
+    .click-instruction { font-size: 1rem; }
+    .welcome-card { padding: 22px; }
+    .celebration-card { padding: 20px; }
+    .sub-greeting { font-size: 1rem; }
+    .cake-container { margin: 16px auto; }
 }
